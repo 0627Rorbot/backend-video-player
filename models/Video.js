@@ -1,13 +1,16 @@
-// backend/models/Video.js
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose');
-
-const videoSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    url: { type: String, required: true },
-    viewerCount: { type: Number, default: 0 }
+const VideoSchema = new mongoose.Schema({
+  title: String,
+  s3_key: String,
+  thumbnail: String,
+  metadata: {
+    chapters: String,
+    start: Number,
+  },
+  subtitles: [String], // Array of subtitle file links
+  uploadDate: Date,
+  createdAt: { type: Date, default: Date.now },
 });
 
-const Video = mongoose.model('Video', videoSchema);
-
-module.exports = Video;
+module.exports = mongoose.model("Video", VideoSchema);
